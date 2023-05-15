@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           LSS-Einsatzlistenpfeile im Dark Mode Weiß
 // @namespace      leitstellenspiel.de
-// @version        1.0
+// @version        1.1
 // @description    Ändert die Sortier-Pfeile der Möglichen Einsatzliste in Weiß im Dark-Modus
 // @author         MissSobol
 // @match          https://www.leitstellenspiel.de/einsaetze
@@ -13,7 +13,7 @@
 
     // Überprüfe das Erscheinungsbild der Website
     const backgroundColor = window.getComputedStyle(document.body).getPropertyValue('background-color');
-    const isDarkMode = backgroundColor !== 'rgb(255, 255, 255)';
+    const isDarkMode = backgroundColor !== 'rgb(250, 250, 250)';
 
     // Wenn der Dark-Modus aktiv ist, ändere die Pfeilfarbe
     if (isDarkMode) {
