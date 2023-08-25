@@ -1,15 +1,59 @@
 // ==UserScript==
 // @name           LSS-Einsatzlistenpfeile im Dark Mode Weiß
 // @namespace      leitstellenspiel.de
-// @version        1.2
+// @version        1.3r
 // @description    Ändert die Sortier-Pfeile der Möglichen Einsatzliste in Weiß im Dark-Modus
 // @author         MissSobol
 // @match          https://www.leitstellenspiel.de/einsaetze
 // @grant          GM_addStyle
 // ==/UserScript==
 
-//Lieber Scriptnutzer,
-//schweren Herzens habe ich heute alle meine Scripte deaktiviert. Der Betreiber hat mir meinen Forenaccount gesperrt, will mir aber weder verraten warum, noch ist man gewillt in Diskurs mit mir zu treten. Da ich ohne einen Forenaccount nicht das Level an Support geben kann, welches ich für mich selber als erforderlich betrachte, habe ich mit sofortiger Wirkung alle meine Scripte deaktiviert.
-//Ich bedanke mich für 5 Jahre Zusammenarbeit im Forum. Danke an alle, die meine Scripte genutzt haben, Daumen dagelassen haben und Kommentare geschrieben haben.
-//Liebe Grüße und noch viel Spaß
-//Sobol
+(function() {
+    'use strict';
+
+    // Überprüfe das Erscheinungsbild der Website
+    const backgroundColor = window.getComputedStyle(document.body).getPropertyValue('background-color');
+    const isDarkMode = backgroundColor !== 'rgb(250, 250, 250)';
+
+    // Wenn der Dark-Modus aktiv ist, ändere die Pfeilfarbe
+    if (isDarkMode) {
+        // Füge benutzerdefinierten CSS-Stil hinzu, um die Pfeile zu ändern
+        GM_addStyle(`
+            /* Entferne die Hintergrundgrafiken für Pfeile und setze die Hintergrundfarbe */
+            .tablesorter-header.tablesorter-headerAsc {
+                background-image: none !important;
+               //background-color: #000000 !important;
+                padding-right: 20px !important;
+            }
+
+            .tablesorter-header.tablesorter-headerDesc {
+                background-image: none !important;
+                //background-color: #000000 !important;
+                padding-right: 20px !important;
+            }
+
+            .tablesorter-header.tablesorter-headerUnSorted {
+                background-image: none !important;
+                //background-color: #000000 !important;
+                padding-right: 20px !important;
+            }
+
+            /* Füge benutzerdefinierte Pfeile hinzu */
+            .tablesorter-header.tablesorter-headerAsc .tablesorter-header-inner::after {
+                content: "▲";
+                color: #ffffff !important;
+                float: right !important;
+            }
+            .tablesorter-header.tablesorter-headerUnSorted .tablesorter-header-inner::after {
+                content: "=";
+                color: #ffffff !important;
+                float: right !important;
+            }
+            .tablesorter-header.tablesorter-headerDesc .tablesorter-header-inner::after {
+                content: "▼";
+                color: #ffffff !important;
+                float: right !important;
+            }
+        `);
+    }
+})();
